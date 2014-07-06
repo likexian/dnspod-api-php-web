@@ -1,0 +1,18 @@
+<div class="add_domain">
+<form class="form-inline" method="POST" action="?action=domaincreate">
+    <div class="form-group">
+        <input type="text" name="domain" class="form-control" placeholder="如：likexian.com" />
+        <input type="submit" class="btn btn-default" value="添加" />
+    </div>
+</form>
+</div>
+<table class="table hovered table-striped">
+    <thead>
+        <tr>
+            <th>编号</th><th>域名</th><th>等级</th><th>状态</th><th>记录</th><th>更新</th><th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{list}}
+    </tbody>
+</table>

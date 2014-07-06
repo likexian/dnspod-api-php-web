@@ -1,0 +1,5 @@
+<div class="result_message bg-{{status}}">
+    <div id="message">{{message}}</div>
+    <div id="back">正在返回，请稍候...</div>
+</div>
+<script type="text/javascript">var url = '{{url}}';if (url) {setTimeout(function() {if (url == '-1') {history.back();} else {location.href=url;}}, 3000);} else {document.getElementById('back').style.display='none';}</script>

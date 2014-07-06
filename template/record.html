@@ -1,0 +1,14 @@
+<div>
+    <input type="button" class="btn btn-default" value="返回域名" onclick="location.href='?action=domainlist'" />
+    <input type="button" class="btn btn-default" value="添加记录" onclick="location.href='?action=recordcreatef&domain_id={{domain_id}}&grade={{grade}}'" />
+</div>
+<table class="table hovered table-striped">
+    <thead>
+        <tr>
+            <th>编号</th><th>子域名</th><th>类型</th><th>线路</th><th>记录</th><th>状态</th><th>MX</th><th>TTL</th><th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{list}}
+    </tbody>
+</table>
