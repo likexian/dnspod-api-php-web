@@ -1,9 +1,5 @@
 # DNSPod API PHP Web 示例
 
-## 与我联系
-- [李院长](http://github.com/likexian)
-- [http://www.likexian.com/](http://www.likexian.com/)
-
 ## DEMO 图片
 
 ### 用户登录
@@ -29,3 +25,13 @@
 
 ### 输入D令牌
 ![输入D令牌](8.png)
+
+## LICENSE
+
+Copyright 2011-2019, Li Kexian
+
+Apache License, Version 2.0
+
+## About
+
+- [Li Kexian](https://www.likexian.com/)
