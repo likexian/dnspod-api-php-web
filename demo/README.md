@@ -23,9 +23,6 @@
 ### 操作失败
 ![操作失败](7.png)
 
-### 输入D令牌
-![输入D令牌](8.png)
-
 ## LICENSE
 
 Copyright 2011-2019, Li Kexian

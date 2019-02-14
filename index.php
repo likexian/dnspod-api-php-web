@@ -16,33 +16,23 @@ $dnspod = new dnspod();
 @session_start();
 
 if ($_GET['action'] == 'domainlist') {
-    if ($_POST['login_code'] == '') {
-        if ($_POST['login_email'] == '') {
-            if ($_SESSION['login_email'] == '') {
-                $dnspod->message('danger', '请输入登录账号。', -1);
-            }
-        } else {
-            $_SESSION['login_email'] = $_POST['login_email'];
+    if ($_POST['token_id'] == '') {
+        if ($_SESSION['token_id'] == '') {
+            $dnspod->message('danger', '请输入Token ID。', -1);
         }
-
-        if ($_POST['login_password'] == '') {
-            if ($_SESSION['login_password'] == '') {
-                $dnspod->message('danger', '请输入登录密码。', -1);
-            }
-        } else {
-            $_SESSION['login_password'] = $_POST['login_password'];
-        }
-
-        $_SESSION['login_code'] = '';
     } else {
-        $_SESSION['login_code'] = $_POST['login_code'];
+        $_SESSION['token_id'] = $_POST['token_id'];
+    }
+
+    if ($_POST['token_key'] == '') {
+        if ($_SESSION['token_key'] == '') {
+            $dnspod->message('danger', '请输入Token Key。', -1);
+        }
+    } else {
+        $_SESSION['token_key'] = $_POST['token_key'];
     }
 
     $response = $dnspod->api_call('Domain.List', array());
-    if ($response['status']['code'] == 50) {
-        header('Location: ?action=logind');
-        exit();
-    }
 
     $list = '';
     $domain_sub = file_get_contents('./template/domain_sub.html');
@@ -77,12 +67,7 @@ if ($_GET['action'] == 'domainlist') {
         $dnspod->message('danger', '参数错误。', -1);
     }
 
-    $_SESSION['login_code'] = $_POST['login_code'];
     $response = $dnspod->api_call('Domain.Status', array('domain_id' => $_GET['domain_id'], 'status' => $_GET['status']));
-    if ($response['status']['code'] == 50) {
-        header('Location: ?action=domainstatusd&domain_id=' . $_GET['domain_id'] . '&status=' . $_GET['status']);
-        exit();
-    }
 
     $dnspod->message('success', ($_GET['status'] == 'enable' ? '启用' : '暂停') . '成功。', '?action=domainlist');
 } elseif ($_GET['action'] == 'domainremove') {
@@ -90,12 +75,7 @@ if ($_GET['action'] == 'domainlist') {
         $dnspod->message('danger', '参数错误。', -1);
     }
 
-    $_SESSION['login_code'] = $_POST['login_code'];
     $response = $dnspod->api_call('Domain.Remove', array('domain_id' => $_GET['domain_id']));
-    if ($response['status']['code'] == 50) {
-        header('Location: ?action=domainremoved&domain_id=' . $_GET['domain_id']);
-        exit();
-    }
 
     $dnspod->message('success', '删除成功。', '?action=domainlist');
 } elseif ($_GET['action'] == 'recordlist') {
@@ -308,30 +288,6 @@ if ($_GET['action'] == 'domainlist') {
     );
 
     $dnspod->message('success', ($_GET['status'] == 'enable' ? '启用' : '暂停') . '成功。', '?action=recordlist&domain_id=' . $_GET['domain_id']);
-} elseif ($_GET['action'] == 'domainstatusd') {
-    if ($_GET['domain_id'] == '') {
-        $dnspod->message('danger', '参数错误。', -1);
-    }
-    if ($_GET['status'] == '') {
-        $dnspod->message('danger', '参数错误。', -1);
-    }
-    $text = $dnspod->get_template('logind');
-    $text = str_replace('{{title}}', '域名' . ($_GET['status'] == 'enable' ? '启用' : '暂停'), $text);
-    $text = str_replace('{{action}}', 'domainstatus&domain_id=' . $_GET['domain_id'] . '&status=' . $_GET['status'], $text);
-} elseif ($_GET['action'] == 'domainremoved') {
-    if ($_GET['domain_id'] == '') {
-        $dnspod->message('danger', '参数错误。', -1);
-    }
-    $text = $dnspod->get_template('logind');
-    $text = str_replace('{{title}}', '域名删除', $text);
-    $text = str_replace('{{action}}', 'domainremove&domain_id=' . $_GET['domain_id'], $text);
-} elseif ($_GET['action'] == 'logind') {
-    if ($_SESSION['login_email'] == '' || $_SESSION['login_password'] == '') {
-        $dnspod->message('danger', '参数错误。', -1);
-    }
-    $text = $dnspod->get_template('logind');
-    $text = str_replace('{{title}}', '用户登录', $text);
-    $text = str_replace('{{action}}', 'domainlist', $text);
 } else {
     $text = $dnspod->get_template('login');
     $text = str_replace('{{title}}', '用户登录', $text);

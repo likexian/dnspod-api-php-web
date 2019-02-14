@@ -35,8 +35,7 @@ class dnspod {
         }
 
         $api = 'https://dnsapi.cn/' . $api;
-        $data = array_merge($data, array('login_email' => $_SESSION['login_email'],
-            'login_password' => $_SESSION['login_password'], 'login_code' => $_SESSION['login_code'],
+        $data = array_merge($data, array('login_token' => $_SESSION['token_id'] . ',' . $_SESSION['token_key'],
             'format' => 'json', 'lang' => 'cn', 'error_on_empty' => 'no'));
 
         $result = $this->post_data($api, $data, $_SESSION['cookies']);
@@ -46,7 +45,6 @@ class dnspod {
 
         $result = explode("\r\n\r\n", $result);
         if (preg_match_all('/^Set-Cookie:\s*([^;]*)/mi', $result[0], $cookies)) {
-            $_SESSION['login_code'] = '';
             foreach ($cookies[1] as $key => $value) {
                 if (substr($value, 0, 1) == 't') {
                     $_SESSION['cookies'] = $value;
@@ -58,11 +56,11 @@ class dnspod {
         if (!is_array($results)) {
             $this->message('danger', '内部错误：返回异常', '');
         }
-        
-        if ($results['status']['code'] != 1 && $results['status']['code'] != 50) {
+
+        if ($results['status']['code'] != 1) {
             $this->message('danger', $results['status']['message'], -1);
         }
-        
+
         return $results;
     }
 
@@ -98,7 +96,6 @@ class dnspod {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 1);
-        // curl_setopt($ch, CURLOPT_SSLVERSION, 6);
         curl_setopt($ch, CURLOPT_COOKIE, $cookie);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
         curl_setopt($ch, CURLOPT_USERAGENT, 'DNSPod API PHP Web Client/1.0.0 (i@likexian.com)');
