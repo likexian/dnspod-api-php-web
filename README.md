@@ -37,9 +37,9 @@
 
 ## LICENSE
 
-Copyright 2011-2019, Li Kexian
+Copyright 2011-2019 Li Kexian
 
-Apache License, Version 2.0
+Licensed under the Apache License 2.0
 
 ## About
 
