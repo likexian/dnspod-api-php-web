@@ -103,6 +103,7 @@ if ($_GET['action'] == 'domainlist') {
         $list_sub = str_replace('{{value}}', $record['value'], $list_sub);
         $list_sub = str_replace('{{type}}', $record['type'], $list_sub);
         $list_sub = str_replace('{{line}}', $record['line'], $list_sub);
+        $list_sub = str_replace('{{remark}}', $record['remark'], $list_sub);
         $list_sub = str_replace('{{enabled}}', $record['enabled'] ? '启用' : '暂停', $list_sub);
         $list_sub = str_replace('{{status_new}}', $record['enabled'] ? 'disable' : 'enable', $list_sub);
         $list_sub = str_replace('{{status_text}}', $record['enabled'] ? '暂停' : '启用', $list_sub);
@@ -202,7 +203,7 @@ if ($_GET['action'] == 'domainlist') {
     }
 
     if (!$_SESSION['line_' . $_GET['grade']]) {
-        $response = $dnspod->api_call('Record.Line', array('domain_grade' => $_GET['grade']));
+        $response = $dnspod->api_call('Record.Line', array('domain_grade' => $_GET['grade'],'domain_id' => $_GET['domain_id']));
         $_SESSION['line_' . $_GET['grade']] = $response['lines'];
     }
 
