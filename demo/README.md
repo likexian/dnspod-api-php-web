@@ -25,7 +25,7 @@
 
 ## LICENSE
 
-Copyright 2011-2019 Li Kexian
+Copyright 2011-2020 Li Kexian
 
 Licensed under the Apache License 2.0
 
