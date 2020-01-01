@@ -202,7 +202,7 @@ if ($_GET['action'] == 'domainlist') {
     }
 
     if (!$_SESSION['line_' . $_GET['grade']]) {
-        $response = $dnspod->api_call('Record.Line', array('domain_grade' => $_GET['grade']));
+        $response = $dnspod->api_call('Record.Line', array('domain_grade' => $_GET['grade'],'domain_id' => $_GET['domain_id']));
         $_SESSION['line_' . $_GET['grade']] = $response['lines'];
     }
 
