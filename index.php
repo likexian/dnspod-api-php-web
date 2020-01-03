@@ -127,9 +127,10 @@ if ($_GET['action'] == 'domainlist') {
         $_SESSION['type_' . $_GET['grade']] = $response['types'];
     }
 
-    if (!$_SESSION['line_' . $_GET['grade']]) {
-        $response = $dnspod->api_call('Record.Line', array('domain_grade' => $_GET['grade']));
-        $_SESSION['line_' . $_GET['grade']] = $response['lines'];
+    if (!$_SESSION['line_' . $_GET['domain_id']]) {
+        $response = $dnspod->api_call('Record.Line',
+            array('domain_id' => $_GET['domain_id'], 'domain_grade' => $_GET['grade']));
+        $_SESSION['line_' . $_GET['domain_id']] = $response['lines'];
     }
 
     $type_list = '';
@@ -138,7 +139,7 @@ if ($_GET['action'] == 'domainlist') {
     }
 
     $line_list = '';
-    foreach ($_SESSION['line_' . $_GET['grade']] as $key => $value) {
+    foreach ($_SESSION['line_' . $_GET['domain_id']] as $key => $value) {
         $line_list .= '<option value="' . $value . '">' . $value . '</option>';
     }
 
@@ -202,9 +203,10 @@ if ($_GET['action'] == 'domainlist') {
         $_SESSION['type_' . $_GET['grade']] = $response['types'];
     }
 
-    if (!$_SESSION['line_' . $_GET['grade']]) {
-        $response = $dnspod->api_call('Record.Line', array('domain_grade' => $_GET['grade'],'domain_id' => $_GET['domain_id']));
-        $_SESSION['line_' . $_GET['grade']] = $response['lines'];
+    if (!$_SESSION['line_' . $_GET['domain_id']]) {
+        $response = $dnspod->api_call('Record.Line',
+            array('domain_id' => $_GET['domain_id'], 'domain_grade' => $_GET['grade']));
+        $_SESSION['line_' . $_GET['domain_id']] = $response['lines'];
     }
 
     $type_list = '';
@@ -213,7 +215,7 @@ if ($_GET['action'] == 'domainlist') {
     }
 
     $line_list = '';
-    foreach ($_SESSION['line_' . $_GET['grade']] as $key => $value) {
+    foreach ($_SESSION['line_' . $_GET['domain_id']] as $key => $value) {
         $line_list .= '<option value="' . $value . '" ' . ($record['record_line'] == $value ? 'selected="selected"' : '') . '>' . $value . '</option>';
     }
 
