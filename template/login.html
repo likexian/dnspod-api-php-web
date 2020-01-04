@@ -1,11 +1,15 @@
 <form method="POST" action="?action=domainlist">
-<div class="input-group input-group-lg t">
-    <span class="input-group-addon">Token ID</span>
-    <input type="text" name="token_id" class="form-control">
-</div>
-<div class="input-group input-group-lg t">
-    <span class="input-group-addon">Token Key</span>
-    <input type="password" name="token_key" class="form-control">
-</div>
-<input type="submit" class="btn btn-primary btn-lg btn-block" value="提交" />
+    <div class="input-group input-group-lg input-group-block">
+        <div class="input-group-prepend">
+            <span class="input-group-text input-group-addon">Token ID</span>
+        </div>
+        <input type="text" name="token_id" class="form-control">
+    </div>
+    <div class="input-group input-group-lg input-group-block">
+        <div class="input-group-prepend">
+            <span class="input-group-text input-group-addon">Token Key</span>
+        </div>
+        <input type="password" name="token_key" class="form-control">
+    </div>
+    <input type="submit" class="btn btn-primary btn-lg btn-block" value="提交" />
 </form>
