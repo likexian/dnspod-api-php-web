@@ -103,12 +103,12 @@ if ($_GET['action'] == 'domainlist') {
         $list_sub = str_replace('{{value}}', $record['value'], $list_sub);
         $list_sub = str_replace('{{type}}', $record['type'], $list_sub);
         $list_sub = str_replace('{{line}}', $record['line'], $list_sub);
-        $list_sub = str_replace('{{remark}}', $record['remark'], $list_sub);
         $list_sub = str_replace('{{enabled}}', $record['enabled'] ? '启用' : '暂停', $list_sub);
         $list_sub = str_replace('{{status_new}}', $record['enabled'] ? 'disable' : 'enable', $list_sub);
         $list_sub = str_replace('{{status_text}}', $record['enabled'] ? '暂停' : '启用', $list_sub);
         $list_sub = str_replace('{{mx}}', $record['mx'] ? $record['mx'] : '-', $list_sub);
         $list_sub = str_replace('{{ttl}}', $record['ttl'], $list_sub);
+        $list_sub = str_replace('{{remark}}', $record['remark'], $list_sub);
         $list .= $list_sub;
     }
 
@@ -154,6 +154,7 @@ if ($_GET['action'] == 'domainlist') {
     $text = str_replace('{{value}}', '', $text);
     $text = str_replace('{{mx}}', '10', $text);
     $text = str_replace('{{ttl}}', '600', $text);
+    $text = str_replace('{{remark}}', '', $text);
 } elseif ($_GET['action'] == 'recordcreate') {
     if ($_GET['domain_id'] == '') {
         $dnspod->message('danger', '参数错误。', -1);
@@ -185,6 +186,15 @@ if ($_GET['action'] == 'domainlist') {
             'ttl' => $_POST['ttl'],
         )
     );
+
+    if ($_POST['remark'] != "") {
+        $response = $dnspod->api_call('Record.Remark',
+            array('domain_id' => $_GET['domain_id'],
+                'record_id' => $response['record']['id'],
+                'remark' => $_POST['remark'],
+            )
+        );
+    }
 
     $dnspod->message('success', '添加成功。', '?action=recordlist&domain_id=' . $_GET['domain_id']);
 } elseif ($_GET['action'] == 'recordeditf') {
@@ -230,6 +240,7 @@ if ($_GET['action'] == 'domainlist') {
     $text = str_replace('{{value}}', $record['value'], $text);
     $text = str_replace('{{mx}}', $record['mx'], $text);
     $text = str_replace('{{ttl}}', $record['ttl'], $text);
+    $text = str_replace('{{remark}}', $record['remark'], $text);
 } elseif ($_GET['action'] == 'recordedit') {
     if ($_GET['domain_id'] == '') {
         $dnspod->message('danger', '参数错误。', -1);
@@ -265,6 +276,15 @@ if ($_GET['action'] == 'domainlist') {
             'ttl' => $_POST['ttl'],
         )
     );
+
+    if ($_POST['remark'] != $_POST['oremark']) {
+        $response = $dnspod->api_call('Record.Remark',
+            array('domain_id' => $_GET['domain_id'],
+                'record_id' => $_GET['record_id'],
+                'remark' => $_POST['remark'],
+            )
+        );
+    }
 
     $dnspod->message('success', '修改成功。', '?action=recordlist&domain_id=' . $_GET['domain_id']);
 } elseif ($_GET['action'] == 'recordremove') {

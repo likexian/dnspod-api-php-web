@@ -1,8 +1,9 @@
 <div class="add_record">
     <form method="POST" action="?action={{action}}&domain_id={{domain_id}}&record_id={{record_id}}">
+        <input type="hidden" id="oremark" name="oremark" value="{{remark}}" />
         <div class="input-group input-group-lg input-group-block">
             <div class="input-group-prepend">
-                <span class="input-group-text input-group-addon">主机名</span>
+                <span class="input-group-text input-group-addon">子域名</span>
             </div>
             <input type="text" class="form-control" id="sub_domain" name="sub_domain" placeholder="如：www" value="{{sub_domain}}">
         </div>
@@ -39,6 +40,12 @@
                 <span class="input-group-text input-group-addon">TTL</span>
             </div>
             <input type="text" class="form-control" id="ttl" name="ttl" placeholder="如：600" value="{{ttl}}">
+        </div>
+        <div class="input-group input-group-lg input-group-block">
+            <div class="input-group-prepend">
+                <span class="input-group-text input-group-addon">备注</span>
+            </div>
+            <input type="text" class="form-control" id="remark" name="remark" placeholder="可选" value="{{remark}}">
         </div>
         <input type="submit" class="btn btn-primary btn-lg btn-block" value="提交" />
     </form>

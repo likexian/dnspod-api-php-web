@@ -10260,3 +10260,10 @@ a.text-dark:hover, a.text-dark:focus {
 .add-domain-input {
   width: 230px !important;
 }
+.record-remark {
+  max-width: 100px;
+  overflow: hidden;
+  word-break: keep-all;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

@@ -22,9 +22,8 @@
 
 ## 环境要求
 
-- PHP5.x
+- PHP5.x/7.x
 - SESSION
-- JSON
 - CURL
 
 ## 安装说明
