@@ -1,6 +1,7 @@
 # DNSPod API PHP Web 示例
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![Packagist](https://img.shields.io/packagist/v/likexian/dnspod-web.svg)](https://packagist.org/packages/likexian/dnspod-web)
 
 ## 功能说明
 
@@ -28,7 +29,11 @@
 
 ## 安装说明
 
-直接放到网站的任何目录，然后在浏览器打开即可查看示例。
+直接下载放到网站的任何目录，然后在浏览器打开即可查看示例。
+
+您还可以通过 composer 来安装它：
+
+    $ composer create-project likexian/dnspod-web
 
 ## DEMO
 

@@ -1,0 +1,16 @@
+{
+    "name": "likexian/dnspod-web",
+    "description": "DNSPod API PHP Web Example.",
+    "type": "project",
+    "version": "3.0.0",
+    "keywords": ["dnspod", "dnspod-api", "dnspod-web"],
+    "license": "Apache-2.0",
+    "homepage": "https://github.com/likexian/dnspod-api-php-web",
+    "authors": [
+        {
+            "name": "Li Kexian",
+            "role": "Developer",
+            "homepage": "https://www.likexian.com/"
+        }
+    ]
+}
